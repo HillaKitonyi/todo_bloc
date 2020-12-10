@@ -30,23 +30,6 @@ class FireAuthService {
       await _firebaseAuth.signInWithEmailAndPassword(email: emailStr, password: passwordStr);
       return right(unit);
     } on FirebaseAuthException catch (e) {
-      return (e.code == 'email-already-in-use')
-          ? left(const AuthFailure.emailAlreadyInUse())
-          : left(const AuthFailure.serverError());
-    }
-  }
-
-  Future<Either<AuthFailure, Unit>> registerEmailPassword({
-    @required EmailAddress emailAddress,
-    @required Password password,
-  }) async {
-    final String emailStr = emailAddress.value.getOrElse(() => null);
-    final String passwordStr = password.value.getOrElse(() => null);
-
-    try {
-      await _firebaseAuth.signInWithEmailAndPassword(email: emailStr, password: passwordStr);
-      return right(unit);
-    } on FirebaseAuthException catch (e) {
       switch (e.code) {
         case 'user-not-found':
         case 'wrong-password':
@@ -59,6 +42,23 @@ class FireAuthService {
           return left(const AuthFailure.serverError());
           break;
       }
+    }
+  }
+
+  Future<Either<AuthFailure, Unit>> registerEmailPassword({
+    @required EmailAddress emailAddress,
+    @required Password password,
+  }) async {
+    final String emailStr = emailAddress.value.getOrElse(() => null);
+    final String passwordStr = password.value.getOrElse(() => null);
+
+    try {
+      await _firebaseAuth.createUserWithEmailAndPassword(email: emailStr, password: passwordStr);
+      return right(unit);
+    } on FirebaseAuthException catch (e) {
+      return (e.code == 'email-already-in-use')
+          ? left(const AuthFailure.emailAlreadyInUse())
+          : left(const AuthFailure.serverError());
     }
   }
 
@@ -87,7 +87,7 @@ extension on User {
   UserModel get toUserModel => UserModel(
         uid: uid,
         emailAddress: email,
-        displayName: displayName,
-        photoURL: photoURL,
+        displayName: displayName ?? '',
+        photoURL: photoURL ?? '',
       );
 }

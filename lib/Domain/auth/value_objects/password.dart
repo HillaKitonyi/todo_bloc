@@ -14,8 +14,8 @@ class Password extends ValueObject<String> {
   Password._(this.value);
 }
 
-Either<ValueFailure, String> validatePassword(String input) {
-  final passwordRegExp = RegExp(r'^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$');
+Either<ValueFailure<String>, String> validatePassword(String input) {
+  final passwordRegExp = RegExp(r'^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$');
   if (input.length < 6) {
     return left(ValueFailure.shortPassword(failedVal: input));
   } else if (!passwordRegExp.hasMatch(input)) {

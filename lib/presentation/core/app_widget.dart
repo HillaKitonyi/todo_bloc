@@ -24,6 +24,12 @@ class App extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           title: 'BLoC Todos',
           builder: ExtendedNavigator.builder<Router>(router: Router()),
+          theme: ThemeData(
+            inputDecorationTheme: InputDecorationTheme(
+              isDense: true,
+              border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+            ),
+          ),
         ),
       ),
     );
