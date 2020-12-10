@@ -16,7 +16,7 @@ class _$UserModelTearOff {
 // ignore: unused_element
   _UserModel call(
       {@required String uid,
-      @required EmailAddress emailAddress,
+      @required String emailAddress,
       @required String displayName,
       @required String photoURL}) {
     return _UserModel(
@@ -35,7 +35,7 @@ const $UserModel = _$UserModelTearOff();
 /// @nodoc
 mixin _$UserModel {
   String get uid;
-  EmailAddress get emailAddress;
+  String get emailAddress;
   String get displayName;
   String get photoURL;
 
@@ -47,10 +47,7 @@ abstract class $UserModelCopyWith<$Res> {
   factory $UserModelCopyWith(UserModel value, $Res Function(UserModel) then) =
       _$UserModelCopyWithImpl<$Res>;
   $Res call(
-      {String uid,
-      EmailAddress emailAddress,
-      String displayName,
-      String photoURL});
+      {String uid, String emailAddress, String displayName, String photoURL});
 }
 
 /// @nodoc
@@ -72,7 +69,7 @@ class _$UserModelCopyWithImpl<$Res> implements $UserModelCopyWith<$Res> {
       uid: uid == freezed ? _value.uid : uid as String,
       emailAddress: emailAddress == freezed
           ? _value.emailAddress
-          : emailAddress as EmailAddress,
+          : emailAddress as String,
       displayName:
           displayName == freezed ? _value.displayName : displayName as String,
       photoURL: photoURL == freezed ? _value.photoURL : photoURL as String,
@@ -87,10 +84,7 @@ abstract class _$UserModelCopyWith<$Res> implements $UserModelCopyWith<$Res> {
       __$UserModelCopyWithImpl<$Res>;
   @override
   $Res call(
-      {String uid,
-      EmailAddress emailAddress,
-      String displayName,
-      String photoURL});
+      {String uid, String emailAddress, String displayName, String photoURL});
 }
 
 /// @nodoc
@@ -113,7 +107,7 @@ class __$UserModelCopyWithImpl<$Res> extends _$UserModelCopyWithImpl<$Res>
       uid: uid == freezed ? _value.uid : uid as String,
       emailAddress: emailAddress == freezed
           ? _value.emailAddress
-          : emailAddress as EmailAddress,
+          : emailAddress as String,
       displayName:
           displayName == freezed ? _value.displayName : displayName as String,
       photoURL: photoURL == freezed ? _value.photoURL : photoURL as String,
@@ -136,7 +130,7 @@ class _$_UserModel with DiagnosticableTreeMixin implements _UserModel {
   @override
   final String uid;
   @override
-  final EmailAddress emailAddress;
+  final String emailAddress;
   @override
   final String displayName;
   @override
@@ -191,14 +185,14 @@ class _$_UserModel with DiagnosticableTreeMixin implements _UserModel {
 abstract class _UserModel implements UserModel {
   const factory _UserModel(
       {@required String uid,
-      @required EmailAddress emailAddress,
+      @required String emailAddress,
       @required String displayName,
       @required String photoURL}) = _$_UserModel;
 
   @override
   String get uid;
   @override
-  EmailAddress get emailAddress;
+  String get emailAddress;
   @override
   String get displayName;
   @override
